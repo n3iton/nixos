@@ -37,7 +37,7 @@
   sops.defaultSopsFile = ../../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
 
-  sops.age.keyFile = "/home/neiton/.config/sops/age/keys.txt";
+  sops.age.keyFile = "/etc/sops/age/keys.txt";
 
   sops.secrets.example-key = { };
   sops.secrets."myservice/my_subdir/my_secret" = { };
