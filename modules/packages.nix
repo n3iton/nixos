@@ -5,6 +5,7 @@
     # list of unfree packages
     obsidian
     vscode
+    zoom-us
 
     # Terminal utilitues
     curl
@@ -52,6 +53,7 @@
     nixfmt-rfc-style # formatter for nix
     nil # LSP server for nix
     lua-language-server # LSP server for lua
+    go # golang
 
     # Cursor theme
     rose-pine-hyprcursor
@@ -70,6 +72,7 @@
 
     # GUI programs
     librewolf # browser
+    chromium
     keepassxc # password manger
     kitty # terminal emulator
     qbittorrent # torrent client
@@ -78,9 +81,11 @@
     thunderbird # Post client and RSS reader
     syncthing # File synchronization
     obs-studio # recording
-    mpv # Player
-    gnucash # Finances
-
+    mpv # Player    
+    qalculate-qt # Calculator
+    audacity # Audio recording and editing
+    calibre # Ebook managment
+    rustdesk # Remote desktop
   ];
 
 }
