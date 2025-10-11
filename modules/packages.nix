@@ -19,6 +19,8 @@
     ripgrep
     tealdeer
     starship
+    zip
+    unzip
 
     # clipboard
     cliphist
@@ -54,6 +56,8 @@
     nil # LSP server for nix
     lua-language-server # LSP server for lua
     go # golang
+    gcc
+    gnumake
 
     # Cursor theme
     rose-pine-hyprcursor
@@ -81,11 +85,17 @@
     thunderbird # Post client and RSS reader
     syncthing # File synchronization
     obs-studio # recording
-    mpv # Player    
+    mpv # Player
     qalculate-qt # Calculator
     audacity # Audio recording and editing
     calibre # Ebook managment
     rustdesk # Remote desktop
+    nur.repos.slaier.audiorelay
+
+    # android MTP
+    go-mtpfs
+
+    wireguard-tools
   ];
 
 }
