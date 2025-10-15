@@ -90,7 +90,6 @@
     audacity # Audio recording and editing
     calibre # Ebook managment
     rustdesk # Remote desktop
-    nur.repos.slaier.audiorelay
 
     # android MTP
     go-mtpfs

@@ -9,8 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nur.url = "github:nix-community/NUR";
-    
   };
 
   outputs =
@@ -18,7 +16,6 @@
       self,
       nixpkgs,
       lanzaboote,
-      nur,
       ...
     }@inputs:
     {
@@ -34,9 +31,6 @@
             (
               { pkgs, lib, ... }:
               {
-                # Подключаем overlay NUR
-                nixpkgs.overlays = [ nur.overlays.default ];
-
                 environment.systemPackages = [
                   pkgs.sbctl
                 ];
