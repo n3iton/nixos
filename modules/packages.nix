@@ -56,6 +56,7 @@
     nil # LSP server for nix
     lua-language-server # LSP server for lua
     go # golang
+    graphviz
     gcc
     gnumake
 
