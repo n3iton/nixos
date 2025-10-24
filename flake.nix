@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     sops-nix.url = "github:Mic92/sops-nix";
 
     lanzaboote = {
@@ -15,9 +16,24 @@
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
       lanzaboote,
       ...
     }@inputs:
+    let
+      # Общий overlay, добавляющий "unstable" пакеты в стабильный pkgs
+      unstableOverlay =
+        final: prev:
+        let
+          unstablePkgs = import nixpkgs-unstable {
+            system = prev.system;
+            config.allowUnfree = true;
+          };
+        in
+        {
+          unstable = unstablePkgs; # доступ к ним через pkgs.unstable.*
+        };
+    in
     {
       nixosConfigurations = {
         t490s = nixpkgs.lib.nixosSystem {
@@ -31,6 +47,8 @@
             (
               { pkgs, lib, ... }:
               {
+                nixpkgs.overlays = [ unstableOverlay ];
+
                 environment.systemPackages = [
                   pkgs.sbctl
                 ];
