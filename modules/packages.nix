@@ -91,6 +91,7 @@
     audacity # Audio recording and editing
     calibre # Ebook managment
     rustdesk # Remote desktop
+    local.audiorelay
 
     # android MTP
     go-mtpfs

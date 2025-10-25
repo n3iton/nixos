@@ -33,6 +33,18 @@
         {
           unstable = unstablePkgs; # доступ к ним через pkgs.unstable.*
         };
+
+      # Локальный overlay, добавляющий собственные пакеты в pkgs.local.*
+      localOverlay =
+        final: prev:
+        let
+          localPkgs = {
+            audiorelay = prev.callPackage ./pkgs/audiorelay.nix { };
+          };
+        in
+        {
+          local = localPkgs; # доступ к ним через pkgs.local.*
+        };
     in
     {
       nixosConfigurations = {
@@ -47,7 +59,10 @@
             (
               { pkgs, lib, ... }:
               {
-                nixpkgs.overlays = [ unstableOverlay ];
+                nixpkgs.overlays = [
+                  unstableOverlay
+                  localOverlay
+                ];
 
                 environment.systemPackages = [
                   pkgs.sbctl
