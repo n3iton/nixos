@@ -92,6 +92,7 @@
     calibre # Ebook managment
     rustdesk # Remote desktop
     local.audiorelay
+    dbeaver-bin # Database access
 
     # android MTP
     go-mtpfs
