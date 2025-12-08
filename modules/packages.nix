@@ -5,6 +5,7 @@
     # list of unfree packages
     obsidian
     vscode
+    unstable.jetbrains.goland
     zoom-us
 
     # Terminal utilitues

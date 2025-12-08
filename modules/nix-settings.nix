@@ -10,6 +10,7 @@
       "libsciter" # for rustdesk
       "libfprint-2-tod1-goodix-550a"
       "audiorelay"
+      "goland"
     ];
 
   # Nix Configuration
