@@ -94,6 +94,8 @@
     rustdesk # Remote desktop
     local.audiorelay
     dbeaver-bin # Database access
+    unstable.kdePackages.kdenlive
+    unstable.ffmpeg
 
     # android MTP
     go-mtpfs
