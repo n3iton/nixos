@@ -83,6 +83,7 @@
     kitty # terminal emulator
     qbittorrent # torrent client
     ayugram-desktop # telegram client
+    telegram-desktop # telegram client
     libreoffice # office suite
     thunderbird # Post client and RSS reader
     syncthing # File synchronization
