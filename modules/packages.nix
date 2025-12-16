@@ -103,6 +103,8 @@
     go-mtpfs
 
     wireguard-tools
+    
+    yandex-disk
   ];
 
 }

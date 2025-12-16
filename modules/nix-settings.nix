@@ -12,6 +12,7 @@
       "audiorelay"
       "goland"
       "google-chrome"
+      "yandex-disk"
     ];
 
   # Nix Configuration
