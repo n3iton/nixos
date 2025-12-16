@@ -7,6 +7,7 @@
     vscode
     unstable.jetbrains.goland
     zoom-us
+    google-chrome
 
     # Terminal utilitues
     curl
