@@ -23,6 +23,7 @@
     starship
     zip
     unzip
+    unstable.ffmpeg
 
     # clipboard
     cliphist
@@ -97,7 +98,6 @@
     local.audiorelay
     dbeaver-bin # Database access
     unstable.kdePackages.kdenlive
-    unstable.ffmpeg
     xournalpp
 
     # android MTP
