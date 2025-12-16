@@ -98,6 +98,7 @@
     dbeaver-bin # Database access
     unstable.kdePackages.kdenlive
     unstable.ffmpeg
+    xournalpp
 
     # android MTP
     go-mtpfs
