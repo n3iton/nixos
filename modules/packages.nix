@@ -8,6 +8,7 @@
     unstable.jetbrains.goland
     zoom-us
     google-chrome
+    yandex-disk
 
     # Terminal utilitues
     curl
@@ -105,7 +106,6 @@
 
     wireguard-tools
     
-    yandex-disk
   ];
 
 }
