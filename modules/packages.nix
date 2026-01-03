@@ -50,9 +50,6 @@
     # file manager
     kdePackages.dolphin
 
-    # networking
-    networkmanagerapplet
-
     # programming languages and LSP servers
     nixfmt-rfc-style # formatter for nix
     nil # LSP server for nix
@@ -104,7 +101,7 @@
     go-mtpfs
 
     wireguard-tools
-    
+
   ];
 
 }

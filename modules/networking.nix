@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   networking.networkmanager.enable = true;
   # networking.wg-quick.interfaces.wg0.configFile = "/home/neiton/Downloads/wg0.conf";
@@ -11,4 +11,8 @@
       59100
     ];
   };
+
+  environment.systemPackages = with pkgs; [
+    networkmanagerapplet
+  ];
 }
