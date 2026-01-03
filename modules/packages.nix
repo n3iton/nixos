@@ -53,10 +53,6 @@
     # networking
     networkmanagerapplet
 
-    # bluetooth
-    bluez
-    blueman
-
     # programming languages and LSP servers
     nixfmt-rfc-style # formatter for nix
     nil # LSP server for nix
