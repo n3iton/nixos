@@ -5,7 +5,6 @@
     # list of unfree packages
     obsidian
     vscode
-    unstable.jetbrains.goland
     zoom-us
     google-chrome
     yandex-disk
