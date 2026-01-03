@@ -7,4 +7,9 @@
     tod.enable = true;
     tod.driver = pkgs.libfprint-2-tod1-goodix-550a;
   };
+
+  environment.systemPackages = with pkgs; [
+    libfprint
+    fprintd
+  ];
 }

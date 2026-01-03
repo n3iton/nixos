@@ -61,10 +61,6 @@
     # Cursor theme
     rose-pine-hyprcursor
 
-    # fingerprint scanner
-    libfprint
-    fprintd
-
     e2fsprogs
 
     sops
