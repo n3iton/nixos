@@ -12,6 +12,7 @@
       "audiorelay"
       "google-chrome"
       "yandex-disk"
+      "anydesk"
     ];
 
   # Nix Configuration

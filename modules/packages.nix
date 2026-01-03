@@ -95,6 +95,7 @@
     audacity # Audio recording and editing
     calibre # Ebook managment
     rustdesk # Remote desktop
+    anydesk
     local.audiorelay
     dbeaver-bin # Database access
     unstable.kdePackages.kdenlive
