@@ -34,7 +34,6 @@
 
     # brightness and sound
     brightnessctl
-    pamixer
 
     # screenshots
     grim

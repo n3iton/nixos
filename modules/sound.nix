@@ -19,7 +19,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # pamixer
+    pamixer
     pavucontrol
     pulseaudio
   ];
