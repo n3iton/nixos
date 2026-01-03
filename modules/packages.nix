@@ -24,6 +24,9 @@
     zip
     unzip
     unstable.ffmpeg
+    kubectl
+    minikube
+    kubernetes-helm
 
     # clipboard
     cliphist
