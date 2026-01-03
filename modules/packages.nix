@@ -97,9 +97,6 @@
     unstable.kdePackages.kdenlive
     xournalpp
 
-    # android MTP
-    go-mtpfs
-
     wireguard-tools
 
   ];
