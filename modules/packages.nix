@@ -48,7 +48,7 @@
     rofi # app launcher
 
     # file manager
-    xfce.thunar
+    kdePackages.dolphin
 
     # networking
     networkmanagerapplet
