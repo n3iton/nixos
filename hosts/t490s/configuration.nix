@@ -7,8 +7,6 @@
   imports = [
     ./hardware-configuration.nix
 
-    inputs.sops-nix.nixosModules.sops
-
     ../../modules/internationalisation.nix
     ../../modules/gc.nix
     ../../modules/time.nix
@@ -34,14 +32,6 @@
     ../../modules/yubikey.nix
     ../../modules/firmware-update.nix
   ];
-
-  sops.defaultSopsFile = ../../secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
-
-  sops.age.keyFile = "/home/neiton/.config/sops/age/keys.txt";
-
-  sops.secrets.example-key = { };
-  sops.secrets."myservice/my_subdir/my_secret" = { };
 
   environment.variables.EDITOR = "nvim";
 

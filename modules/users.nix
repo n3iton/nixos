@@ -1,9 +1,6 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
-  sops.secrets.my-password.neededForUsers = true;
-  sops.secrets.root-password.neededForUsers = true;
-
-  users.users.root.hashedPasswordFile = config.sops.secrets.root-password.path;
+  users.users.root.hashedPassword = "$6$yRsXfD2g5BJRD2I7$FchaWAER8VbHKHi7xguodKke1Tvnrc4Jssqi74NO2S7A4p5QDfMGadcyrPLKxqBha84VdXiMhZi1rTjvMa7Hh1";
 
   users.users.neiton = {
     isNormalUser = true;
@@ -23,7 +20,7 @@
       neovim
     ];
 
-    hashedPasswordFile = config.sops.secrets.my-password.path;
+    hashedPassword = "$6$wX2aRSYWbRJBqOB6$1WO0a1L25cnfLrY371Ulg3TbfwbuZeuEABHR4VJjJoiUW6AMG5t.vqNYPGCoGqV9uHCqlehJhD3Z18f/GYFNR0";
   };
 
   programs.fish.enable = true;

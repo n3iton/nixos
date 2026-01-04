@@ -63,8 +63,6 @@
 
     e2fsprogs
 
-    sops
-
     # backups
     restic
     rclone
