@@ -90,6 +90,7 @@
     unstable.kdePackages.kdenlive
     xournalpp
     gparted
+    woeusb
 
     wireguard-tools
 
