@@ -2,13 +2,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.2";
-
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
 
   outputs =
@@ -16,7 +9,6 @@
       self,
       nixpkgs,
       nixpkgs-unstable,
-      lanzaboote,
       ...
     }@inputs:
     let
@@ -53,8 +45,6 @@
           modules = [
             ./hosts/t490s/configuration.nix
 
-            lanzaboote.nixosModules.lanzaboote
-
             (
               { pkgs, lib, ... }:
               {
@@ -62,17 +52,6 @@
                   unstableOverlay
                   localOverlay
                 ];
-
-                environment.systemPackages = [
-                  pkgs.sbctl
-                ];
-
-                boot.loader.systemd-boot.enable = lib.mkForce false;
-
-                boot.lanzaboote = {
-                  enable = true;
-                  pkiBundle = "/var/lib/sbctl";
-                };
               }
             )
           ];
