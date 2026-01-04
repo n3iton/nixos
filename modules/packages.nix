@@ -91,6 +91,7 @@
     dbeaver-bin # Database access
     unstable.kdePackages.kdenlive
     xournalpp
+    gparted
 
     wireguard-tools
 
