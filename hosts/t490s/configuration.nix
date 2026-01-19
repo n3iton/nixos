@@ -25,7 +25,6 @@
     ../../modules/bluetooth.nix
     ../../modules/sound.nix
     ../../modules/fonts.nix
-    ../../modules/swap.nix
     ../../modules/open-ssh.nix
     ../../modules/security.nix
     ../../modules/android.nix
