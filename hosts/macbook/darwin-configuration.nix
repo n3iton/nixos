@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  nix.package = pkgs.nix;
+  nix.enable = false;
 
   users.users.yourname = {
     home = "/Users/neiton";
