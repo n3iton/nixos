@@ -2,7 +2,6 @@
 
 {
   nix.package = pkgs.nix;
-  services.nix-daemon.enable = true;
 
   users.users.yourname = {
     home = "/Users/neiton";
