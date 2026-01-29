@@ -1,7 +1,10 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
+    darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -9,10 +12,13 @@
       self,
       nixpkgs,
       nixpkgs-unstable,
+      darwin,
       ...
     }@inputs:
     let
-      # Общий overlay, добавляющий "unstable" пакеты в стабильный pkgs
+      # ===== overlays =====
+
+      # Добавляет pkgs.unstable.*
       unstableOverlay =
         final: prev:
         let
@@ -22,22 +28,23 @@
           };
         in
         {
-          unstable = unstablePkgs; # доступ к ним через pkgs.unstable.*
+          unstable = unstablePkgs;
         };
 
-      # Локальный overlay, добавляющий собственные пакеты в pkgs.local.*
-      localOverlay =
-        final: prev:
-        let
-          localPkgs = {
-            audiorelay = prev.callPackage ./pkgs/audiorelay.nix { };
-          };
-        in
-        {
-          local = localPkgs; # доступ к ним через pkgs.local.*
+      # Локальные пакеты: pkgs.local.*
+      localOverlay = final: prev: {
+        local = {
+          audiorelay = prev.callPackage ./pkgs/audiorelay.nix { };
         };
+      };
+
+      commonOverlays = [
+        unstableOverlay
+        localOverlay
+      ];
     in
     {
+      # ===== NixOS =====
       nixosConfigurations = {
         t490s = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -46,12 +53,27 @@
             ./hosts/t490s/configuration.nix
 
             (
-              { pkgs, lib, ... }:
+              { ... }:
               {
-                nixpkgs.overlays = [
-                  unstableOverlay
-                  localOverlay
-                ];
+                nixpkgs.overlays = commonOverlays;
+              }
+            )
+          ];
+        };
+      };
+
+      # ===== macOS (nix-darwin) =====
+      darwinConfigurations = {
+        macbook = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/macbook/darwin-configuration.nix
+
+            (
+              { ... }:
+              {
+                nixpkgs.overlays = commonOverlays;
               }
             )
           ];
