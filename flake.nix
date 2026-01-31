@@ -69,6 +69,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./hosts/macbook/darwin-configuration.nix
+            ./modules/nix-settings.nix
 
             (
               { ... }:
