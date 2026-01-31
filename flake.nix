@@ -5,6 +5,11 @@
 
     darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -13,6 +18,7 @@
       nixpkgs,
       nixpkgs-unstable,
       darwin,
+      home-manager,
       ...
     }@inputs:
     let
@@ -70,6 +76,13 @@
           modules = [
             ./hosts/macbook/darwin-configuration.nix
             ./modules/nix-settings.nix
+            home-manager.darwinModules.home-manager
+            
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.nikita = ./hosts/macbook/home.nix;
+            }
 
             (
               { ... }:
