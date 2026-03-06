@@ -13,6 +13,7 @@
       "google-chrome"
       "yandex-disk"
       "anydesk"
+      "postman"
     ];
 
   # Nix Configuration

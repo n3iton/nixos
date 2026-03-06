@@ -7,9 +7,18 @@
     home = "/Users/nikita";
   };
 
-  environment.systemPackages = with pkgs; [
-    neovim
-  ];
+  system.primaryUser = "nikita";
 
+  homebrew = {
+    enable = true;
+    
+    casks = [
+      "loop-messenger"
+      "docker-desktop"
+      "firefox"
+      "kontur-talk"
+    ];
+  };
+  
   system.stateVersion = 5;
 }
