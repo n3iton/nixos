@@ -3,8 +3,8 @@
 {
   nix.enable = false;
 
-  users.users.yourname = {
-    home = "/Users/neiton";
+  users.users.nikita = {
+    home = "/Users/nikita";
   };
 
   environment.systemPackages = with pkgs; [
