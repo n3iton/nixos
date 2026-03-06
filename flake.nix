@@ -76,6 +76,7 @@
           modules = [
             ./hosts/macbook/darwin-configuration.nix
             ./modules/nix-settings.nix
+            ./modules/fonts.nix
             home-manager.darwinModules.home-manager
             
             {
