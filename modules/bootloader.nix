@@ -7,7 +7,6 @@
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.useOSProber = true;
 
-
   #boot.loader.timeout = 2;
   #boot.initrd.enable = true;
   #boot.initrd.verbose = false;
