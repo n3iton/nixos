@@ -45,6 +45,7 @@
     dunst # notifications
     wlogout # logout menu
     rofi # app launcher
+    libnotify
 
     # file manager
     kdePackages.dolphin
