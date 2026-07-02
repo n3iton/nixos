@@ -3,7 +3,7 @@
 {
   # USB Automounting
   services.gvfs.enable = true;
-  # services.udisks2.enable = true;
+  services.udisks2.enable = true;
   # services.devmon.enable = true;
 
   # Enable USB Guard
@@ -23,4 +23,7 @@
     usbutils
     ntfs3g
   ];
+
+  # Thunderbolt
+  services.hardware.bolt.enable = true;
 }
