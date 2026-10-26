@@ -3,6 +3,10 @@
 #
 #   curl -fsSL https://raw.githubusercontent.com/n3iton/nixos/main/bootstrap.sh | bash -s -- macbook-air
 #
+# Если Determinate Nix не скачивается напрямую, передай прокси только для него:
+#
+#   curl -fsSL https://raw.githubusercontent.com/n3iton/nixos/main/bootstrap.sh | NIX_INSTALLER_PROXY=http://host:port bash -s -- macbook-air
+#
 # Аргумент — имя из darwinConfigurations во flake.nix.
 # Скрипт идемпотентный: повторный запуск просто подтянет изменения и сделает switch.
 set -euo pipefail
@@ -27,6 +31,10 @@ if [[ $EUID -eq 0 ]]; then
   exit 1
 fi
 
+# Прокси используется только для скачивания Determinate Nix и задаётся явно; brew, git, darwin-rebuild и всё остальное идут напрямую.
+NIX_INSTALLER_PROXY="${NIX_INSTALLER_PROXY:-}"
+unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY all_proxy ALL_PROXY
+
 # Один раз спрашиваем пароль и держим sudo живым до конца скрипта
 sudo -v
 while true; do sudo -n true; sleep 50; kill -0 "$$" || exit; done 2>/dev/null &
@@ -41,8 +49,17 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # 2. Determinate Nix
 if [[ ! -x /nix/var/nix/profiles/default/bin/nix ]]; then
-  log "Устанавливаю Determinate Nix"
-  curl -fsSL https://install.determinate.systems/nix | sh -s -- install --no-confirm
+  # https_proxy подхватывают curl в скрипте-инсталляторе и сам инсталлятор
+  # (он пробрасывает его через sudo); задаём только для этих двух команд
+  DET_ENV=(env)
+  if [[ -n "$NIX_INSTALLER_PROXY" ]]; then
+    DET_ENV+=("https_proxy=$NIX_INSTALLER_PROXY" "NIX_INSTALLER_PROXY=$NIX_INSTALLER_PROXY")
+    log "Устанавливаю Determinate Nix через прокси $NIX_INSTALLER_PROXY"
+  else
+    log "Устанавливаю Determinate Nix"
+  fi
+  "${DET_ENV[@]}" curl -fsSL https://install.determinate.systems/nix |
+    "${DET_ENV[@]}" sh -s -- install --no-confirm
 fi
 # shellcheck disable=SC1091
 . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
