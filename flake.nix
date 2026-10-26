@@ -48,6 +48,32 @@
         unstableOverlay
         localOverlay
       ];
+
+      # Общий конструктор для маков: отличается только модулем хоста
+      mkDarwin =
+        hostModule:
+        darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = { inherit inputs; };
+          modules = [
+            hostModule
+            ./modules/nix-settings.nix
+            ./modules/fonts.nix
+            home-manager.darwinModules.home-manager
+
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+            }
+
+            (
+              { ... }:
+              {
+                nixpkgs.overlays = commonOverlays;
+              }
+            )
+          ];
+        };
     in
     {
       # ===== NixOS =====
@@ -69,30 +95,12 @@
       };
 
       # ===== macOS (nix-darwin) =====
-      darwinConfigurations = {
-        macbook = darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/macbook/darwin-configuration.nix
-            ./modules/nix-settings.nix
-            ./modules/fonts.nix
-            home-manager.darwinModules.home-manager
+      darwinConfigurations = rec {
+        mac-mini = mkDarwin ./hosts/mac-mini;
+        macbook-air = mkDarwin ./hosts/macbook-air;
 
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.nikita = ./hosts/macbook/home.nix;
-            }
-
-            (
-              { ... }:
-              {
-                nixpkgs.overlays = commonOverlays;
-              }
-            )
-          ];
-        };
+        # Старое имя, чтобы `--flake .#macbook` на mac mini продолжал работать
+        macbook = mac-mini;
       };
     };
 }
