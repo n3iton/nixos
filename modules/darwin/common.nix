@@ -68,6 +68,8 @@ in
 {
   # Общая конфигурация для всех маков.
   # Хост может исключить часть пакетов через my.homebrew.exclude{Casks,Brews}.
+  imports = [ ./defaults.nix ];
+
   options.my.homebrew = {
     excludeCasks = lib.mkOption {
       type = lib.types.listOf lib.types.str;
