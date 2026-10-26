@@ -18,7 +18,7 @@ NIXOS_DIR="${NIXOS_DIR:-$HOME/nixos}"
 DOTFILES_REPO="${DOTFILES_REPO:-https://github.com/n3iton/dotfiles.git}"
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
 STOW_PACKAGES="${STOW_PACKAGES:-tmux fish starship}"
-DARWIN_REF="github:nix-darwin/nix-darwin/nix-darwin-25.11#darwin-rebuild"
+DARWIN_REF="github:nix-darwin/nix-darwin/nix-darwin-26.05#darwin-rebuild"
 
 log() { printf '\n\033[1;34m==> %s\033[0m\n' "$*"; }
 

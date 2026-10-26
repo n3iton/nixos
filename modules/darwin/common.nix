@@ -15,7 +15,9 @@ let
     "kontur-talk"
     "kde-connect"
     "happ"
-    "throne"
+    # Пакеты из сторонних tap'ов пишем полным именем: тогда nix-darwin помечает их
+    # trusted (Homebrew 7 без этого их не грузит), а brew bundle сам ставит нужный tap
+    "throneproj/tap/throne"
     "visual-studio-code"
     "zoom"
     "monitorcontrol"
@@ -59,7 +61,7 @@ let
     "crane"
     "sing-box"
     "direnv"
-    "tetherkit"
+    "xiaomiku01/tap/tetherkit" # полное имя — см. комментарий у casks
     "kind"
   ];
 in
@@ -116,15 +118,6 @@ in
 
     homebrew = {
       enable = true;
-
-      # Homebrew 7 не грузит пакеты из неофициальных tap'ов без `brew trust`,
-      # а в nix-darwin 25.11 у taps нет опции trusted — поэтому пишем строки сами.
-      # brew bundle применяет trusted и ставит tap'ы раньше остальных записей,
-      # так что то, что extraConfig оказывается в конце Brewfile, не мешает.
-      extraConfig = ''
-        tap "throneproj/tap", trusted: { casks: ["throne"] }
-        tap "XiaoMiku01/tap", trusted: { formulae: ["tetherkit"] }
-      '';
 
       onActivation = {
         autoUpdate = true;

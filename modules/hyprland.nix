@@ -28,7 +28,7 @@
     hyprsunset
     lxqt.lxqt-policykit
 
-    pkgs.swww
+    pkgs.awww
     qt5.qtwayland
     qt6.qtwayland
   ];

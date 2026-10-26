@@ -51,7 +51,7 @@
     kdePackages.dolphin
 
     # programming languages and LSP servers
-    nixfmt-rfc-style # formatter for nix
+    nixfmt # formatter for nix
     nil # LSP server for nix
     lua-language-server # LSP server for lua
     go # golang
