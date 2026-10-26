@@ -107,11 +107,15 @@ in
 
     homebrew = {
       enable = true;
-      taps = [
-        "XiaoMiku01/tap"
-        "brewforge/extras"
-        "throneproj/tap"
-      ];
+
+      # Homebrew 7 не грузит пакеты из неофициальных tap'ов без `brew trust`,
+      # а в nix-darwin 25.11 у taps нет опции trusted — поэтому пишем строки сами.
+      # brew bundle применяет trusted и ставит tap'ы раньше остальных записей,
+      # так что то, что extraConfig оказывается в конце Brewfile, не мешает.
+      extraConfig = ''
+        tap "throneproj/tap", trusted: { casks: ["throne"] }
+        tap "XiaoMiku01/tap", trusted: { formulae: ["tetherkit"] }
+      '';
 
       onActivation = {
         autoUpdate = true;
