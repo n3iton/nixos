@@ -105,6 +105,15 @@ in
 
     environment.shells = [ pkgs.fish ];
 
+    # Rosetta 2 нужна Intel-приложениям, без неё brew bundle
+    # на таких casks падает. extraActivation выполняется от root раньше шага homebrew.
+    system.activationScripts.extraActivation.text = ''
+      if ! /usr/bin/arch -x86_64 /usr/bin/true 2>/dev/null; then
+        echo "installing Rosetta 2..." >&2
+        /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+      fi
+    '';
+
     homebrew = {
       enable = true;
 
