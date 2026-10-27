@@ -70,6 +70,35 @@
     SoftwareUpdate.AutomaticallyInstallMacOSUpdates = false;
 
     CustomUserPreferences = {
+      # Spotlight только для запуска приложений. В EnabledPreferenceRules перечислено то,
+      # что ВЫКЛЮЧЕНО в «Results from System» (System.*) и «Results from Apps» (bundle id);
+      # список снят с mac mini после настройки в System Settings
+      "com.apple.Spotlight".EnabledPreferenceRules = [
+        "Custom.relatedContents"
+        "com.apple.AppStore"
+        "com.apple.iBooksX"
+        "com.apple.calculator"
+        "com.apple.iCal"
+        "com.anthropic.claudefordesktop"
+        "com.apple.AddressBook"
+        "com.apple.Dictionary"
+        "com.apple.games"
+        "com.apple.mail"
+        "com.apple.Notes"
+        "com.apple.Photos"
+        "com.apple.podcasts"
+        "com.apple.reminders"
+        "com.apple.Safari"
+        "com.apple.shortcuts"
+        "com.apple.systempreferences"
+        "com.apple.tips"
+        "com.apple.VoiceMemos"
+        "System.files"
+        "System.folders"
+        "System.iphoneApps"
+        "System.menuItems"
+      ];
+
       # изменение: не мусорить .DS_Store на сетевых и USB-дисках
       "com.apple.desktopservices" = {
         DSDontWriteNetworkStores = true;
