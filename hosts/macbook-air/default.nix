@@ -7,6 +7,9 @@
   networking.hostName = "macbook-air";
   networking.computerName = "Nikita’s MacBook Air";
 
+  # Трекпад: «естественная» прокрутка, тогда свайп влево ведёт на рабочий стол справа
+  system.defaults.NSGlobalDomain."com.apple.swipescrolldirection" = true;
+
   # Пакеты из общего списка, которые не нужны на этом маке
   my.homebrew.excludeCasks = [
     "steam"
