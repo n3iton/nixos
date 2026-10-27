@@ -17,7 +17,7 @@ NIXOS_REPO="${NIXOS_REPO:-https://github.com/n3iton/nixos.git}"
 NIXOS_DIR="${NIXOS_DIR:-$HOME/nixos}"
 DOTFILES_REPO="${DOTFILES_REPO:-https://github.com/n3iton/dotfiles.git}"
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
-STOW_PACKAGES="${STOW_PACKAGES:-tmux fish starship}"
+STOW_PACKAGES="${STOW_PACKAGES:-tmux fish starship git ssh}"
 DARWIN_REF="github:nix-darwin/nix-darwin/nix-darwin-26.05#darwin-rebuild"
 
 log() { printf '\n\033[1;34m==> %s\033[0m\n' "$*"; }
@@ -96,9 +96,23 @@ else
 fi
 
 # 6. Dotfiles через stow (stow ставится brew'ом из flake).
-#    ~/.config создаём заранее, иначе stow превратит в симлинк весь каталог.
+#    Каталоги, куда пишут сами программы, создаём заранее: иначе stow свернёт их в ссылку
+#    на dotfiles, и туда попадут, например, новые ssh-ключи или локальные конфиги.
 log "stow: $STOW_PACKAGES"
-mkdir -p "$HOME/.config"
+mkdir -p "$HOME/.config/git"
+mkdir -p "$HOME/.ssh" && chmod 700 "$HOME/.ssh"
+# stow не перезаписывает обычные файлы, поэтому то, что лежало до него, отодвигаем
+# в *.before-stow. Файлы, которые уже ведут в dotfiles через свёрнутый каталог, не трогаем.
+DOTFILES_REAL="$(cd "$DOTFILES_DIR" && pwd -P)"
+for pkg in $STOW_PACKAGES; do
+  while IFS= read -r rel; do
+    target="$HOME/$rel"
+    [[ -e "$target" && ! -L "$target" ]] || continue
+    [[ "$(cd "$(dirname "$target")" && pwd -P)/" == "$DOTFILES_REAL"/* ]] && continue
+    log "Отодвигаю $target -> $target.before-stow"
+    mv "$target" "$target.before-stow"
+  done < <(cd "$DOTFILES_DIR/$pkg" && find . -type f ! -name .DS_Store | sed 's#^\./##')
+done
 # shellcheck disable=SC2086
 /opt/homebrew/bin/stow --dir "$DOTFILES_DIR" --target "$HOME" --restow $STOW_PACKAGES
 
