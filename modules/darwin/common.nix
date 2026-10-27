@@ -63,6 +63,7 @@ let
     "direnv"
     "xiaomiku01/tap/tetherkit" # полное имя — см. комментарий у casks
     "kind"
+    "helm"
   ];
 in
 {
@@ -109,6 +110,14 @@ in
 
     environment.shells = [ pkgs.fish ];
 
+    time.timeZone = "Europe/Moscow";
+
+    # sudo по Touch ID, в том числе внутри tmux (reattach); без сенсора — обычный пароль
+    security.pam.services.sudo_local = {
+      touchIdAuth = true;
+      reattach = true;
+    };
+
     # Rosetta 2 нужна Intel-приложениям, без неё brew bundle
     # на таких casks падает. extraActivation выполняется от root раньше шага homebrew.
     system.activationScripts.extraActivation.text = ''
@@ -124,6 +133,8 @@ in
       onActivation = {
         autoUpdate = true;
         upgrade = false;
+        # всё, чего нет в конфиге, удаляется при switch (и неиспользуемые tap'ы тоже)
+        cleanup = "uninstall";
       };
 
       casks = lib.subtractLists cfg.excludeCasks casks;
