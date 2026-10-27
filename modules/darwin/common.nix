@@ -127,16 +127,6 @@ in
       fi
     '';
 
-    # Spotlight не должен индексировать хранилище Nix: это сотни тысяч чужих файлов,
-    # которые меняются при каждой пересборке. Список исключений в настройках Spotlight
-    # под SIP, а целый том можно выключить через mdutil.
-    system.activationScripts.postActivation.text = ''
-      if [ -d /nix/store ] && ! mdutil -s /nix 2>/dev/null | grep -q "Indexing disabled"; then
-        echo "disabling Spotlight indexing on /nix..." >&2
-        mdutil -i off /nix >/dev/null || echo "warning: mdutil -i off /nix failed" >&2
-      fi
-    '';
-
     homebrew = {
       enable = true;
 
