@@ -38,6 +38,7 @@
       ShowHardDrivesOnDesktop = false;
       ShowRemovableMediaOnDesktop = true;
       # изменения:
+      AppleShowAllFiles = true; # показывать скрытые файлы (то же, что Cmd+Shift+.)
       _FXSortFoldersFirst = true;
       _FXSortFoldersFirstOnDesktop = true;
       FXDefaultSearchScope = "SCcf"; # искать в текущей папке
@@ -47,6 +48,7 @@
       "com.apple.swipescrolldirection" = false; # без «естественной» прокрутки
       # изменения:
       AppleShowAllExtensions = true;
+      AppleShowAllFiles = true; # скрытые файлы и в окнах «Открыть»/«Сохранить» других программ
       "com.apple.mouse.tapBehavior" = 1; # касание = клик, в том числе на экране входа
       NSAutomaticCapitalizationEnabled = false;
       NSAutomaticPeriodSubstitutionEnabled = false;
