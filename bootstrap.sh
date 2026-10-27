@@ -143,4 +143,14 @@ if [[ "$(dscl . -read "/Users/$USER" UserShell | awk '{print $2}')" != "$FISH" ]
   sudo chsh -s "$FISH" "$USER"
 fi
 
+# 9. Пароль сразу после сна и заставки. Через nix-darwin это не задать: ключ askForPassword
+#    из com.apple.screensaver macOS больше не читает, а sysadminctl требует пароль пользователя.
+#    Пароль читаем с терминала: stdin у скрипта — это сам скрипт (curl | bash).
+if ! sysadminctl -screenLock status 2>&1 | grep -q 'screenLock delay is immediate'; then
+  log "Включаю пароль сразу после сна (sysadminctl спросит пароль пользователя)"
+  if ! sysadminctl -screenLock immediate -password - </dev/tty; then
+    echo "Не удалось включить, позже вручную: sysadminctl -screenLock immediate -password -" >&2
+  fi
+fi
+
 log "Готово. Дальше обновляться так: sudo darwin-rebuild switch --flake $NIXOS_DIR#$HOST"
